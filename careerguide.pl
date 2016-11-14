@@ -1,0 +1,229 @@
+careerguide :-
+	expert_system,
+	reset_system,
+	choose_career(Career),
+	describe(Career), nl.
+
+expert_system :-
+	write('Which career would be the best for me?'), nl,
+	write('For each question, enter your choice followed by a dot'), nl, nl.
+
+choose_career(Career) :-
+	career(Career), !.
+
+:- dynamic(answered/2).
+
+reset_system :-
+	retractall(answered(_,_)).
+reset_system.
+
+
+
+question(incharge) :-
+	write('Do you want to be incharge of others?'), nl.
+
+question(satisfaction) :-
+	write('Which of these would give you the greatest satisfaction?'), nl.
+
+question(people_opinion) :-
+	write('What do most people say about you?'), nl.
+
+question(work_environment) :-
+	write('Which of these work environments sounds most appealing to you?'), nl.
+
+question(favourite_subject) :-
+	write('What was your favourite subject in school?'), nl.
+
+question(desire) :-
+	write('Which of these do you want out of a career?'), nl.
+
+question(jealous) :-
+	write('You are jealous of your friend\'s career because he gets to:'), nl.
+
+question(schedule) :-
+	write('What kind of schedule do you want in your career?'), nl.
+
+question(presentation) :-
+	write('Suppose it\'s presentation time. You\'re the one who would be:'), nl.
+
+question(best_part) :-
+	write('Best part of your very first job?'), nl.
+
+question(dreams_true) :-
+	write('Optimism- Do dreams come true?'), nl.
+
+
+
+option(yes) :-
+	write('Yes').
+option(no) :-
+	write('No').
+
+option(safe_and_protect) :-
+	write('Knowing others were safe and protected because of my work').
+option(impact) :-
+	write('Creating something that had an impact on someone').
+option(negotiation) :-
+	write('Successfully closing a difficult negotiation').
+option(strong_active) :-
+	write('Feeling strong and active').
+option(managing_complex) :-
+	write('Managing complex tasks with ease and organisation').
+option(information) :-
+	write('Knowing cutting edge information that most people don\'t').
+option(leading) :-
+	write('Leading a team of people').
+
+option(detail_oriented) :-
+	write('Detail oriented').
+option(professional) :-
+	write('Professional').
+option(outgoing) :-
+	write('Outgoing').
+option(perfectionist) :-
+	write('Perfectionist').
+option(creative) :-
+	write('Creative').
+option(negotiator) :-
+	write('Great negotiator').
+
+option(outside) :-
+	write('I\'d like to be outside, interacting with different people').
+option(home) :-
+	write('I\'d like to work from home').
+option(different_places) :-
+	write('I\'d like to travel to different places as a part of my job').
+option(office) :-
+	write('I\'d like to work with a lot of people in a fun and unorthodox office').
+option(physically_active) :-
+	write('Something physically active, I can\'t be cooped up all day').
+
+option(history) :-
+	write('History/Social Studies').
+option(literature) :-
+	write('English literature').
+option(economics) :-
+	write('Economics').
+option(art) :-
+	write('Art').
+option(pt) :-
+	write('Play Time or Recess').
+option(biology) :-
+	write('Biology').
+option(math) :-
+	write('Mathematics').
+option(computer) :-
+	write('Computer Science').
+
+option(paycheck) :-
+	write('A big paycheck').
+option(balance) :-
+	write('Good work-life balance').
+option(job_security) :-
+	write('Job security').
+option(job_satisfaction) :-
+	write('Job satisfaction').
+option(fame) :-
+	write('Fame').
+
+option(difference) :-
+	write('Make a difference in people\'s everyday lives').
+option(be_creative) :-
+	write('Be creative, everyday').
+option(be_social) :-
+	write('Be very social').
+option(be_in_charge) :-
+	write('Be in charge and call the shots').
+
+option(full_week) :-
+	write('Put in the full week to work and have the weekend to myself').
+option(freedom) :-
+	write('Complete freedom to be flexible depending on my job\'s schedule').
+option(flexible) :-
+	write('I\'d like some set hours, but room to move that around if needed').
+
+option(podium) :-
+	write('is at the podium').
+option(speech_writer) :-
+	write('wrote the speech').
+option(powerpoint) :-
+	write('made the powerpoint').
+option(taking_notes) :-
+	write('is taking notes').
+option(sleeping) :-
+	write('is sleeping').
+
+option(new_friends) :-
+	write('Made new friends').
+option(learn_something) :-
+	write('Learning something new').
+option(make_cash) :-
+	write('Making some cash').
+option(get_things_done) :-
+	write('Getting things done').
+option(help_people) :-
+	write('Helping people out').
+
+option(of_course) :-
+	write('Of course! Anything is possible').
+option(maybe) :-
+	write('Maybe. Miracles can happen').
+option(realistic) :-
+	write('No, I\'m realistic').
+option(hope) :-
+	write('I\'m not sure, but I hope so!').
+
+
+
+
+
+
+incharge(Answer) :-
+	answered(incharge, Answer), !.
+incharge(Answer) :-
+	ask(incharge, Answer, [yes, no]).
+
+satisfaction(Answer) :-
+	answered(satisfaction, Answer), !.
+satisfaction(Answer) :-
+	ask(satisfaction, Answer, [safe_and_protect, impact, negotiation, strong_active, managing_complex, information, leading]).
+
+people_opinion(Answer) :-
+	answered(people_opinion, Answer), !.
+people_opinion(Answer) :-
+	ask(people_opinion, Answer, [detail_oriented, professional, outgoing, perfectionist, creative, negotiator]).
+
+work_environment(Answer) :-
+	answered(work_environment, Answer), !.
+work_environment(Answer) :-
+	ask(work_environment, Answer, [outside, home, different_places, office, physically_active]).
+
+favourite_subject(Answer) :-
+	answered(favourite_subject, Answer), !.
+favourite_subject(Answer) :-
+	ask(favourite_subject, Answer, [history, literature, economics, art, pt, biology, math, computer]).
+
+desire(Answer) :-
+	answered(desire, Answer), !.
+desire(Answer) :-
+	ask(desire, Answer, [paycheck, balance, job_security, job_satisfaction, fame]).
+
+jealous(Answer) :-
+	answered(jealous, Answer), !.
+jealous(Answer) :-
+	ask(jealous, Answer, [difference, be_creative, be_social, be_in_charge]).
+
+presentation(Answer) :-
+	answered(presentation, Answer), !.
+presentation(Answer) :-
+	ask(presentation, Answer, [podium, speech_writer, powerpoint, taking_notes, sleeping]).
+
+best_part(Answer) :-
+	answered(best_part, Answer), !.
+best_part(Answer) :-
+	ask(best_part, Answer, [new_friends, learn_something, make_cash, get_things_done, help_people]).
+
+dreams_true(Answer) :-
+	answered(dreams_true, Answer), !.
+dreams_true(Answer) :-
+	ask(dreams_true, Answer, [of_course, maybe, realistic, hope]).
