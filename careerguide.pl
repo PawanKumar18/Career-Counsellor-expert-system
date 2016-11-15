@@ -2,10 +2,10 @@ careerguide :-
 	expert_system,
 	reset_system,
 	choose_career(Career),
-	describe(Career), nl.
+	explain(Career), nl.
 
 expert_system :-
-	write('I\'ll help you choose the best career for you!'), nl,
+	write('I\'ll help you find the best career for you!'), nl,
 	write('For each question, enter your choice followed by a dot'), nl, nl.
 
 choose_career(Career) :-
@@ -16,6 +16,49 @@ choose_career(Career) :-
 reset_system :-
 	retractall(answered(_,_)).
 reset_system.
+
+
+career(engineering) :-
+	favourite_subject(computer),
+	\+ people_opinion(creative),
+	\+ people_opinion(negotiator).
+
+career(engineering) :-
+	favourite_subject(math),
+	\+ people_opinion(creative),
+	\+ people_opinion(negotiator).
+
+
+explain(engineering) :-
+	write('Engineering'), nl,
+	write('Application of scientific knowledge in order to invent, innovate, design and improve things.').
+
+explain(medicine) :-
+	write('Medicine'), nl,
+	write('It\'s the science and practice of diagnosis, treatment and prevention of disease.').
+
+explain(writer) :-
+	write('Writer'), nl,
+	write('Become a writer!'), nl,
+	write('You have a skill for language, your imagination is vast, your brain is overflowing with ideas.').
+
+explain(artist) :-
+	write('Artist'), nl,
+	write('You were born to be creative. This career has vast opportunities, including stage artists, movie actors, painters and much more!').
+
+explain(sportsperson) :-
+	write('Sportsperson'), nl,
+	write('You were born to be out on the field! Choose your favourite sport and pursue it with passion.').
+
+explain(teacher) :-
+	write('Teacher/Professor'), nl,
+	write('You have a skill for educating others. Use it for a great and satisfying career away from the fast paced corporate society.').
+
+explain(business) :-
+	write('Business and Management'), nl,
+	write('You\'ve got what it takes to be the boss!'), nl,
+	write('Follow your passion for bright opportunities in Human resources, accountancy, marketing and other related careers.').
+
 
 
 
@@ -185,56 +228,62 @@ option(hope) :-
 incharge(Answer) :-
 	answered(incharge, Answer), !.
 incharge(Answer) :-
+	\+ answered(incharge, _),
 	ask(incharge, Answer, [yes, no]).
 
 satisfaction(Answer) :-
 	answered(satisfaction, Answer), !.
 satisfaction(Answer) :-
+	\+ answered(satisfaction, _),
 	ask(satisfaction, Answer, [safe_and_protect, impact, negotiation, strong_active, managing_complex, information, leading]).
 
 people_opinion(Answer) :-
 	answered(people_opinion, Answer), !.
 people_opinion(Answer) :-
+	\+ answered(people_opinion, _),
 	ask(people_opinion, Answer, [detail_oriented, professional, outgoing, perfectionist, creative, negotiator]).
 
 work_environment(Answer) :-
 	answered(work_environment, Answer), !.
 work_environment(Answer) :-
+	\+ answered(work_environment, _),
 	ask(work_environment, Answer, [outside, home, different_places, office, physically_active]).
 
 favourite_subject(Answer) :-
 	answered(favourite_subject, Answer), !.
 favourite_subject(Answer) :-
+	\+ answered(favourite_subject, _),
 	ask(favourite_subject, Answer, [history, literature, economics, art, pt, biology, math, computer]).
 
 desire(Answer) :-
 	answered(desire, Answer), !.
 desire(Answer) :-
+	\+ answered(desire, _),
 	ask(desire, Answer, [paycheck, balance, job_security, job_satisfaction, fame]).
 
 jealous(Answer) :-
 	answered(jealous, Answer), !.
 jealous(Answer) :-
+	\+ answered(jealous, _),
 	ask(jealous, Answer, [difference, be_creative, be_social, be_in_charge]).
 
 presentation(Answer) :-
 	answered(presentation, Answer), !.
 presentation(Answer) :-
+	\+ answered(presentation, _),
 	ask(presentation, Answer, [podium, speech_writer, powerpoint, taking_notes, sleeping]).
 
 best_part(Answer) :-
 	answered(best_part, Answer), !.
 best_part(Answer) :-
+	\+ answered(best_part, _),
 	ask(best_part, Answer, [new_friends, learn_something, make_cash, get_things_done, help_people]).
 
 dreams_true(Answer) :-
 	answered(dreams_true, Answer), !.
 dreams_true(Answer) :-
+	\+ answered(dreams_true, _),
 	ask(dreams_true, Answer, [of_course, maybe, realistic, hope]).
-
-
-
-
 
 
 
@@ -259,7 +308,7 @@ find_option(Index, [_|Tail], Result) :-
 
 generate_options([],_).
 generate_options([Head|Tail], Index) :-
-	write(Head), write(' '),
-	answer(Head), nl,
+	write(Index), write(' '),
+	option(Head), nl,
 	Nextindex is Index +1,
 	generate_options(Tail, Nextindex).
