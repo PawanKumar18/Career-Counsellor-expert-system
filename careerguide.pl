@@ -101,7 +101,7 @@ career(teacher) :-
 		\+ favourite_subject(math));
 	(best_part(help_people),
 		\+ favourite_subject(biology),
-		\+ people_opinion(creative));
+		\+ people_opinion(creative)).
 
 career(business) :-
 	(people_opinion(negotiator);
@@ -205,14 +205,12 @@ question(dreams_true) :-
 
 
 
-%incharge
 option(yes) :-
 	write('Yes').
 option(no) :-
 	write('No').
 
 
-%satisfaction
 option(safe_and_protect) :-
 	write('Knowing others were safe and protected because of my work').
 option(impact) :-
@@ -229,7 +227,6 @@ option(leading) :-
 	write('Leading a team of people').
 
 
-%people_opinion
 option(detail_oriented) :-
 	write('Detail oriented').
 option(professional) :-
@@ -244,7 +241,6 @@ option(negotiator) :-
 	write('Great negotiator').
 
 
-%work_environment
 option(outside) :-
 	write('I\'d like to be outside, interacting with different people').
 option(home) :-
@@ -257,7 +253,6 @@ option(physically_active) :-
 	write('Something physically active, I can\'t be cooped up all day').
 
 
-%favourite_subject
 option(history) :-
 	write('History/Social Studies').
 option(literature) :-
@@ -276,7 +271,6 @@ option(computer) :-
 	write('Computer Science').
 
 
-%desire
 option(paycheck) :-
 	write('A big paycheck').
 option(balance) :-
@@ -289,7 +283,6 @@ option(fame) :-
 	write('Fame').
 
 
-%jealous
 option(difference) :-
 	write('Make a difference in people\'s everyday lives').
 option(be_creative) :-
@@ -300,7 +293,6 @@ option(be_in_charge) :-
 	write('Be in charge and call the shots').
 
 
-%schedule
 option(full_week) :-
 	write('Put in the full week to work and have the weekend to myself').
 option(freedom) :-
@@ -309,7 +301,6 @@ option(flexible) :-
 	write('I\'d like some set hours, but room to move that around if needed').
 
 
-%presentation
 option(podium) :-
 	write('is at the podium').
 option(speech_writer) :-
@@ -322,7 +313,6 @@ option(sleeping) :-
 	write('is sleeping').
 
 
-%best_part
 option(new_friends) :-
 	write('Made new friends').
 option(learn_something) :-
@@ -335,7 +325,6 @@ option(help_people) :-
 	write('Helping people out').
 
 
-%dreams_true
 option(of_course) :-
 	write('Of course! Anything is possible').
 option(maybe) :-
@@ -395,7 +384,7 @@ jealous(Answer) :-
 schedule(Answer) :-
 	answered(schedule, Answer), !.
 schedule(Answer) :-
-	\+ answered(schedule, Answer), !.
+	\+ answered(schedule, _),
 	ask(schedule, Answer, [full_week, freedom, flexible]).
 
 presentation(Answer) :-
