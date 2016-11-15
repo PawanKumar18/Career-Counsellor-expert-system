@@ -3,6 +3,8 @@ careerguide :-
 	reset_system,
 	choose_career(Career),
 	explain(Career), nl.
+careerguide :-
+	write("Can't find a career for you. Sorry! :("), nl.
 
 expert_system :-
 	write('I\'ll help you find the best career for you!'), nl,
@@ -19,14 +21,12 @@ reset_system.
 
 
 career(engineering) :-
-	favourite_subject(computer),
+	(favourite_subject(computer);favourite_subject(math)),
 	\+ people_opinion(creative),
-	\+ people_opinion(negotiator).
-
-career(engineering) :-
-	favourite_subject(math),
-	\+ people_opinion(creative),
-	\+ people_opinion(negotiator).
+	\+ people_opinion(negotiator),
+	\+ satisfaction(safe_and_protect),
+	\+ satisfaction(negotiation),
+	\+ work_environment(physically_active).
 
 
 explain(engineering) :-
