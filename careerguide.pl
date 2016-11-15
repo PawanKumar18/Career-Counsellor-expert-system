@@ -26,7 +26,109 @@ career(engineering) :-
 	\+ people_opinion(negotiator),
 	\+ satisfaction(safe_and_protect),
 	\+ satisfaction(negotiation),
-	\+ work_environment(physically_active).
+	\+ work_environment(physically_active),
+	\+ desire(fame).
+
+career(medicine) :-
+	favourite_subject(biology),
+	(satisfaction(safe_and_protect);satisfaction(strong_active)),
+	((desire(job_satisfaction); desire(job_security); best_part(help_people)),
+		\+ jealous(be_in_charge),
+		\+ presentation(sleeping)).
+
+career(writer) :-
+	(desire(fame), 
+		favourite_subject(literature));
+	(jealous(be_creative), 
+		favourite_subject(literature));
+	(schedule(flexible), 
+		presentation(speech_writer));
+	(jealous(be_creative), 
+		presentation(speech_writer), 
+		(desire(fame);
+			desire(job_satisfaction);
+			desire(balance)));
+	(schedule(freedom), 
+		favourite_subject(literature));
+	(people_opinion(creative), 
+		favourite_subject(literature), 
+		presentation(speech_writer));
+	(desire(balance), 
+		favourite_subject(literature), 
+		jealous(be_creative)).
+
+career(artist) :-
+	\+ work_environment(office),
+	\+ desire(job_security),
+	(people_opinion(outgoing); 
+		people_opinion(creative); 
+		people_opinion(detail_oriented)),
+	((desire(paycheck); desire(fame)),
+		jealous(be_social), 
+		\+ dreams_true(hope));
+	((dreams_true(of_course); dreams_true(maybe)),
+		favourite_subject(art), 
+		desire(fame));
+	(favourite_subject(art), 
+		presentation(podium), 
+		\+ dreams_true(hope)).
+
+career(sportsperson) :-
+	(work_environment(physically_active), 
+		favourite_subject(pt), 
+		satisfaction(strong_active));
+	(desire(fame), 
+		favourite_subject(pt), 
+		work_environment(physically_active));
+	(jealous(be_social), 
+		favourite_subject(pt), 
+		work_environment(physically_active));
+	(desire(paycheck), 
+		work_environment(physically_active), 
+		satisfaction(strong_active)).
+
+career(teacher) :-
+	\+ favourite_subject(pt),
+	\+ desire(paycheck),
+	\+ desire(fame),
+	schedule(full_week),
+	(jealous(difference),
+		\+ presentation(podium),
+		\+ presentation(sleeping),
+		\+ people_opinion(negotiator),
+		\+ people_opinion(creative),
+		\+ incharge(no),
+		\+ favourite_subject(math));
+	(best_part(help_people),
+		\+ favourite_subject(biology),
+		\+ people_opinion(creative));
+
+career(business) :-
+	(people_opinion(negotiator);
+		satisfaction(leading);
+		satisfaction(negotiation);
+		jealous(be_in_charge)),
+	(incharge(yes),
+		satisfaction(negotiation),
+		people_opinion(negotiator));
+	(presentation(podium),
+		incharge(yes));
+	(presentation(podium),
+		satisfaction(leading),
+		jealous(be_in_charge));
+	favourite_subject(economics).
+
+career(researcher) :-
+	(favourite_subject(math);
+		favourite_subject(biology)),
+	(satisfaction(information);
+		best_part(learn_something),
+		(desire(job_satisfaction);
+			people_opinion(detail_oriented);
+			people_opinion(perfectionist))).
+
+
+
 
 
 explain(engineering) :-
@@ -59,6 +161,9 @@ explain(business) :-
 	write('You\'ve got what it takes to be the boss!'), nl,
 	write('Follow your passion for bright opportunities in Human resources, accountancy, marketing and other related careers.').
 
+explain(researcher) :-
+	write('Researcher'), nl,
+	write('Pursue your interests to enhance the stock of knowledge known to human beings.').
 
 
 
@@ -100,12 +205,14 @@ question(dreams_true) :-
 
 
 
-
+%incharge
 option(yes) :-
 	write('Yes').
 option(no) :-
 	write('No').
 
+
+%satisfaction
 option(safe_and_protect) :-
 	write('Knowing others were safe and protected because of my work').
 option(impact) :-
@@ -121,6 +228,8 @@ option(information) :-
 option(leading) :-
 	write('Leading a team of people').
 
+
+%people_opinion
 option(detail_oriented) :-
 	write('Detail oriented').
 option(professional) :-
@@ -134,6 +243,8 @@ option(creative) :-
 option(negotiator) :-
 	write('Great negotiator').
 
+
+%work_environment
 option(outside) :-
 	write('I\'d like to be outside, interacting with different people').
 option(home) :-
@@ -145,6 +256,8 @@ option(office) :-
 option(physically_active) :-
 	write('Something physically active, I can\'t be cooped up all day').
 
+
+%favourite_subject
 option(history) :-
 	write('History/Social Studies').
 option(literature) :-
@@ -158,10 +271,12 @@ option(pt) :-
 option(biology) :-
 	write('Biology').
 option(math) :-
-	write('Mathematics').
+	write('Mathematics/Physics').
 option(computer) :-
 	write('Computer Science').
 
+
+%desire
 option(paycheck) :-
 	write('A big paycheck').
 option(balance) :-
@@ -173,6 +288,8 @@ option(job_satisfaction) :-
 option(fame) :-
 	write('Fame').
 
+
+%jealous
 option(difference) :-
 	write('Make a difference in people\'s everyday lives').
 option(be_creative) :-
@@ -182,6 +299,8 @@ option(be_social) :-
 option(be_in_charge) :-
 	write('Be in charge and call the shots').
 
+
+%schedule
 option(full_week) :-
 	write('Put in the full week to work and have the weekend to myself').
 option(freedom) :-
@@ -189,6 +308,8 @@ option(freedom) :-
 option(flexible) :-
 	write('I\'d like some set hours, but room to move that around if needed').
 
+
+%presentation
 option(podium) :-
 	write('is at the podium').
 option(speech_writer) :-
@@ -200,6 +321,8 @@ option(taking_notes) :-
 option(sleeping) :-
 	write('is sleeping').
 
+
+%best_part
 option(new_friends) :-
 	write('Made new friends').
 option(learn_something) :-
@@ -211,6 +334,8 @@ option(get_things_done) :-
 option(help_people) :-
 	write('Helping people out').
 
+
+%dreams_true
 option(of_course) :-
 	write('Of course! Anything is possible').
 option(maybe) :-
@@ -266,6 +391,12 @@ jealous(Answer) :-
 jealous(Answer) :-
 	\+ answered(jealous, _),
 	ask(jealous, Answer, [difference, be_creative, be_social, be_in_charge]).
+
+schedule(Answer) :-
+	answered(schedule, Answer), !.
+schedule(Answer) :-
+	\+ answered(schedule, Answer), !.
+	ask(schedule, Answer, [full_week, freedom, flexible]).
 
 presentation(Answer) :-
 	answered(presentation, Answer), !.
