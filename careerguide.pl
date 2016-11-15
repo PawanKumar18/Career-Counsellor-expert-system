@@ -5,7 +5,7 @@ careerguide :-
 	describe(Career), nl.
 
 expert_system :-
-	write('Which career would be the best for me?'), nl,
+	write('I\'ll help you choose the best career for you!'), nl,
 	write('For each question, enter your choice followed by a dot'), nl, nl.
 
 choose_career(Career) :-
@@ -51,6 +51,10 @@ question(best_part) :-
 
 question(dreams_true) :-
 	write('Optimism- Do dreams come true?'), nl.
+
+
+
+
 
 
 
@@ -227,3 +231,35 @@ dreams_true(Answer) :-
 	answered(dreams_true, Answer), !.
 dreams_true(Answer) :-
 	ask(dreams_true, Answer, [of_course, maybe, realistic, hope]).
+
+
+
+
+
+
+
+
+
+
+
+ask(Question, Answer, Options) :-
+	question(Question),
+	generate_options(Options, 1),
+	read(Index),
+	find_option(Index, Options, Selection),
+	asserta(answered(Question, Selection)),
+	Selection = Answer.
+
+
+find_option(1, [Head|_] , Head).
+find_option(Index, [_|Tail], Result) :-
+	Nextindex is Index -1,
+	find_option(Nextindex, Tail, Result).
+
+
+generate_options([],_).
+generate_options([Head|Tail], Index) :-
+	write(Head), write(' '),
+	answer(Head), nl,
+	Nextindex is Index +1,
+	generate_options(Tail, Nextindex).
