@@ -4,7 +4,7 @@ careerguide :-
 	choose_career(Career),
 	explain(Career), nl.
 careerguide :-
-	write("Can't find a career for you. Sorry! :("), nl.
+	write('Can\'t find a career for you. Sorry! :('), nl.
 
 expert_system :-
 	write('I\'ll help you find the best career for you!'), nl,
@@ -21,112 +21,258 @@ reset_system.
 
 
 career(engineering) :-
-	(favourite_subject(computer);favourite_subject(math)),
-	\+ people_opinion(creative),
-	\+ people_opinion(negotiator),
-	\+ satisfaction(safe_and_protect),
-	\+ satisfaction(negotiation),
-	\+ work_environment(physically_active),
-	\+ desire(fame).
-
+	(
+		(
+			favourite_subject(computer);
+			favourite_subject(math)
+		),
+		(
+			(
+				\+ people_opinion(creative),
+				\+ desire(fame)
+			);
+			(
+				\+ people_opinion(negotiator),
+				\+ desire(fame)
+			);
+			(
+				\+ jealous(be_in_charge),
+				\+ work_environment(physically_active)
+			)
+		)
+	);
+	(
+		desire(job_security),
+		(
+			jealous(difference);
+			jealous(be_social)
+		),
+		\+ people_opinion(creative),
+		\+ people_opinion(negotiator)
+	).
+	
 career(medicine) :-
 	favourite_subject(biology),
-	(satisfaction(safe_and_protect);satisfaction(strong_active)),
-	((desire(job_satisfaction); desire(job_security); best_part(help_people)),
-		\+ jealous(be_in_charge),
-		\+ presentation(sleeping)).
+	(
+		satisfaction(safe_and_protect);
+		satisfaction(strong_active); 
+		best_part(help_people);
+		(
+			\+ presentation(sleeping),
+			\+ schedule(freedom)
+		);
+		\+ desire(fame);
+		incharge(no)
+	).
 
 career(writer) :-
-	(desire(fame), 
-		favourite_subject(literature));
-	(jealous(be_creative), 
-		favourite_subject(literature));
-	(schedule(flexible), 
-		presentation(speech_writer));
-	(jealous(be_creative), 
-		presentation(speech_writer), 
-		(desire(fame);
-			desire(job_satisfaction);
-			desire(balance)));
-	(schedule(freedom), 
-		favourite_subject(literature));
-	(people_opinion(creative), 
-		favourite_subject(literature), 
-		presentation(speech_writer));
-	(desire(balance), 
-		favourite_subject(literature), 
-		jealous(be_creative)).
+	(
+		favourite_subject(literature),
+		(
+			\+ desire(job_security);
+			jealous(be_creative);
+			presentation(speech_writer);
+			\+ schedule(full_week);
+			people_opinion(creative)
+		)
+	);
+	(
+		(
+			schedule(flexible);
+			schedule(freedom)
+		),
+		presentation(speech_writer)
+	);
+	(
+		(
+			people_opinion(creative);
+			jealous(be_creative)
+		), 
+		(
+			favourite_subject(literature); 
+			presentation(speech_writer)
+		)
+	);
+	(
+		presentation(speech_writer),
+		(
+			\+ desire(job_security);
+			jealous(be_creative);
+			favourite_subject(literature);
+			\+ schedule(full_week);
+			people_opinion(creative)
+		)
+	).
 
 career(artist) :-
-	\+ work_environment(office),
-	\+ desire(job_security),
-	(people_opinion(outgoing); 
-		people_opinion(creative); 
-		people_opinion(detail_oriented)),
-	((desire(paycheck); desire(fame)),
-		jealous(be_social), 
-		\+ dreams_true(hope));
-	((dreams_true(of_course); dreams_true(maybe)),
-		favourite_subject(art), 
-		desire(fame));
-	(favourite_subject(art), 
-		presentation(podium), 
-		\+ dreams_true(hope)).
+	(
+		favourite_subject(art),
+		(
+			(
+				\+ work_environment(office),
+				\+ desire(job_security)
+			);
+			(
+				(
+					\+ work_environment(office);
+					\+ desire(job_security);
+					jealous(be_social);
+					jealous(be_creative)
+				),
+				(
+					people_opinion(outgoing);
+					people_opinion(creative);
+					people_opinion(detail_oriented)
+				)
+			);
+			(
+				(
+					dreams_true(of_course);
+					dreams_true(maybe)
+				),
+				desire(job_satisfaction)
+			);
+			people_opinion(creative)
+		)
+	);
+	(
+		desire(job_satisfaction),
+		people_opinion(creative),
+		(
+			\+ work_environment(office);
+			jealous(be_creative);
+			presentation(podium)
+		)
+	).
 
 career(sportsperson) :-
-	(work_environment(physically_active), 
-		favourite_subject(pt), 
-		satisfaction(strong_active));
-	(desire(fame), 
-		favourite_subject(pt), 
-		work_environment(physically_active));
-	(jealous(be_social), 
-		favourite_subject(pt), 
-		work_environment(physically_active));
-	(desire(paycheck), 
-		work_environment(physically_active), 
-		satisfaction(strong_active)).
+	(
+		favourite_subject(pt),
+		(
+			work_environment(physically_active);
+			satisfaction(strong_active);
+			(
+				(
+					desire(fame);
+					desire(paycheck);
+					jealous(be_social)
+				),
+				(
+					\+ dreams_true(hope);
+					schedule(flexible);
+					schedule(freedom)
+				)
+			)
+		)
+	);
+	(
+		(
+			satisfaction(strong_active);
+			work_environment(physically_active)
+		),
+		(
+			(
+				\+ desire(job_security);
+				jealous(be_social)
+			),
+			(
+				dreams_true(of_course);
+				dreams_true(maybe);
+				work_environment(different_places);
+				\+ best_part(help_people)
+			)
+		)
+	);
+	(
+		work_environment(physically_active),
+		satisfaction(strong_active)
+	).
 
 career(teacher) :-
-	\+ favourite_subject(pt),
-	\+ desire(paycheck),
-	\+ desire(fame),
-	schedule(full_week),
-	(jealous(difference),
+	(
+		\+ favourite_subject(pt),
+		\+ desire(paycheck),
+		\+ desire(fame),
+		schedule(full_week)
+	);
+	(
+		jealous(difference),
 		\+ presentation(podium),
 		\+ presentation(sleeping),
-		\+ people_opinion(negotiator),
-		\+ people_opinion(creative),
-		\+ incharge(no),
-		\+ favourite_subject(math));
-	(best_part(help_people),
-		\+ favourite_subject(biology),
-		\+ people_opinion(creative)).
-
-career(business) :-
-	(people_opinion(negotiator);
-		satisfaction(leading);
-		satisfaction(negotiation);
-		jealous(be_in_charge)),
-	(incharge(yes),
-		satisfaction(negotiation),
-		people_opinion(negotiator));
-	(presentation(podium),
-		incharge(yes));
-	(presentation(podium),
-		satisfaction(leading),
-		jealous(be_in_charge));
-	favourite_subject(economics).
+		\+ work_environment(different_places),
+		incharge(no)
+	);
+	(
+		(
+			desire(job_security);
+			desire(balance)
+		),
+		(
+			(
+				(
+					jealous(difference);
+					best_part(help_people)
+				),
+				(
+					\+ work_environment(different_places);
+					\+ schedule(freedom)
+				)
+			);
+			(
+				incharge(no),
+				(
+					satisfaction(learn_something);
+					satisfaction(information)
+				)
+			)
+		)
+	).
 
 career(researcher) :-
-	(favourite_subject(math);
-		favourite_subject(biology)),
-	(satisfaction(information);
-		best_part(learn_something),
-		(desire(job_satisfaction);
-			people_opinion(detail_oriented);
-			people_opinion(perfectionist))).
+	(
+		favourite_subject(math);
+		favourite_subject(biology)
+	),
+	(
+		satisfaction(information);
+		(
+			best_part(learn_something),
+			(
+				desire(job_satisfaction);
+				people_opinion(detail_oriented);
+				people_opinion(perfectionist)
+			)
+		)
+	).
 
+career(business) :-
+	(
+		(
+			people_opinion(negotiator);
+			satisfaction(leading);
+			satisfaction(negotiation);
+			jealous(be_in_charge)
+		),
+		(
+			incharge(yes);
+			favourite_subject(economics)
+		)
+	);
+	(
+		people_opinion(negotiator),
+		(
+			satisfaction(leading);
+			satisfaction(negotiator);
+			jealous(be_in_charge)
+		)
+	);
+	(
+		(
+			satisfaction(leading);
+			satisfaction(negotiator)
+		),
+		jealous(be_in_charge)
+	).
 
 
 
@@ -192,7 +338,7 @@ question(schedule) :-
 	write('What kind of schedule do you want in your career?'), nl.
 
 question(presentation) :-
-	write('Suppose it\'s presentation time. You\'re the one who would be:'), nl.
+	write('Suppose it\'s presentation time. You\'re the one who:'), nl.
 
 question(best_part) :-
 	write('Best part of your very first job?'), nl.
