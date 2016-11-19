@@ -19,37 +19,6 @@ reset_system :-
 	retractall(answered(_,_)).
 reset_system.
 
-
-career(engineering) :-
-	(
-		(
-			favourite_subject(computer);
-			favourite_subject(math)
-		),
-		(
-			(
-				\+ people_opinion(creative),
-				\+ desire(fame)
-			);
-			(
-				\+ people_opinion(negotiator),
-				\+ desire(fame)
-			);
-			(
-				\+ jealous(be_in_charge),
-				\+ work_environment(physically_active)
-			)
-		)
-	);
-	(
-		desire(job_security),
-		(
-			jealous(difference);
-			jealous(be_social)
-		),
-		\+ people_opinion(creative),
-		\+ people_opinion(negotiator)
-	).
 	
 career(medicine) :-
 	favourite_subject(biology),
@@ -67,6 +36,9 @@ career(medicine) :-
 
 career(writer) :-
 	(
+		work_environment(_),
+		people_opinion(_),
+		satisfaction(_),
 		favourite_subject(literature),
 		(
 			\+ desire(job_security);
@@ -243,6 +215,37 @@ career(researcher) :-
 				people_opinion(perfectionist)
 			)
 		)
+	).
+
+career(engineering) :-
+	(
+		(
+			favourite_subject(computer);
+			favourite_subject(math)
+		),
+		(
+			(
+				\+ people_opinion(creative),
+				\+ desire(fame)
+			);
+			(
+				\+ people_opinion(negotiator),
+				\+ desire(fame)
+			);
+			(
+				\+ jealous(be_in_charge),
+				\+ work_environment(physically_active)
+			)
+		)
+	);
+	(
+		desire(job_security),
+		(
+			jealous(difference);
+			jealous(be_social)
+		),
+		\+ people_opinion(creative),
+		\+ people_opinion(negotiator)
 	).
 
 career(business) :-
@@ -550,8 +553,6 @@ dreams_true(Answer) :-
 dreams_true(Answer) :-
 	\+ answered(dreams_true, _),
 	ask(dreams_true, Answer, [of_course, maybe, realistic, hope]).
-
-
 
 
 
