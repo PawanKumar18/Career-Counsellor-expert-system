@@ -76,6 +76,38 @@ career(writer) :-
 		)
 	).
 
+career(engineering) :-
+	(
+		(
+			favourite_subject(computer);
+			favourite_subject(math)
+		),
+		(
+			(
+				\+ people_opinion(creative),
+				\+ desire(fame)
+			);
+			(
+				\+ people_opinion(negotiator),
+				\+ desire(fame)
+			);
+			(
+				\+ jealous(be_in_charge),
+				\+ work_environment(physically_active)
+			)
+		)
+	);
+	(
+		desire(job_security),
+		(
+			jealous(difference);
+			jealous(be_social)
+		),
+		\+ people_opinion(creative),
+		\+ people_opinion(negotiator)
+	).
+
+
 career(artist) :-
 	(
 		favourite_subject(art),
@@ -215,37 +247,6 @@ career(researcher) :-
 				people_opinion(perfectionist)
 			)
 		)
-	).
-
-career(engineering) :-
-	(
-		(
-			favourite_subject(computer);
-			favourite_subject(math)
-		),
-		(
-			(
-				\+ people_opinion(creative),
-				\+ desire(fame)
-			);
-			(
-				\+ people_opinion(negotiator),
-				\+ desire(fame)
-			);
-			(
-				\+ jealous(be_in_charge),
-				\+ work_environment(physically_active)
-			)
-		)
-	);
-	(
-		desire(job_security),
-		(
-			jealous(difference);
-			jealous(be_social)
-		),
-		\+ people_opinion(creative),
-		\+ people_opinion(negotiator)
 	).
 
 career(business) :-
